@@ -12,8 +12,8 @@ public:
 	~Point();
 	Point::Point(float x, float y);
 
-protected:
-	VertexArray triangle(sf::Triangles, 3);
+public:
+	VertexArray triangle;
 	Vector2f one, two, three;
 
 
@@ -21,13 +21,9 @@ protected:
 
 Point::Point()
 {
-	isMove = false;
-	dX = 0;
-	dY = 0;
-}
+	triangle.setPrimitiveType(Triangles);
+	triangle.resize(3);
 
-Point::Point(float x, float y)
-{
 	triangle[0].position = sf::Vector2f(10, 10);
 	triangle[1].position = sf::Vector2f(100, 10);
 	triangle[2].position = sf::Vector2f(100, 100);
@@ -38,6 +34,12 @@ Point::Point(float x, float y)
 	triangle[2].color = sf::Color::Green;
 }
 
+Point::Point(float x, float y)
+{
+
+	
+}
+
 Point::~Point()
 {
 }
@@ -45,9 +47,9 @@ Point::~Point()
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+
+	Point point;
 
 	while (window.isOpen())
 	{
@@ -58,8 +60,8 @@ int main()
 				window.close();
 		}
 
-		window.clear();
-		window.draw(shape);
+		window.clear(Color::White);
+		window.draw(point.triangle);
 		window.display();
 	}
 
